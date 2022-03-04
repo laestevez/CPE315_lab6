@@ -38,7 +38,7 @@ public class lab6 {
          try {
             Scanner scanner = new Scanner(inputFile);
             int lineNum = 0;
-            
+
             OneWayCache cache1 = new OneWayCache(twoKB, 1, 1);
             OneWayCache cache2 = new OneWayCache(twoKB, 1, 2);
             OneWayCache cache3 = new OneWayCache(twoKB, 1, 4);
@@ -79,19 +79,20 @@ public class lab6 {
         System.out.println(String.format("Hits: %d\t Hit rate: %.2f%%", hit3, (float)(hit3 / 5000000.0)* 100));
         System.out.println("---------------------------");
          System.out.println("Cache #4:");
-         System.out.println(String.format("Cache size: %d\t Associativity: %d\t Block size: %d", twoKB, 2, 1));
+         System.out.println(String.format("Cache size: %dB\t Associativity: %d\t Block size: %d", twoKB, 2, 1));
          System.out.println(String.format("Hits: %d\t Hit rate: %.2f%%", hit4, hit4 / 5000000.0 * 100));
          System.out.println("---------------------------");
          System.out.println("Cache #5:");
-         System.out.println(String.format("Cache size: %d\t Associativity: %d\t Block size: %d", twoKB, 4, 1));
+         System.out.println(String.format("Cache size: %dB\t Associativity: %d\t Block size: %d", twoKB, 4, 1));
          System.out.println(String.format("Hits: %d\t Hit rate: %.2f%%", hit5, hit5 / 5000000.0 * 100));
          System.out.println("---------------------------");
          System.out.println("Cache #6:");
-         System.out.println(String.format("Cache size: %d\t Associativity: %d\t Block size: %d", twoKB, 4, 4));
+         System.out.println(String.format("Cache size: %dB\t Associativity: %d\t Block size: %d", twoKB, 4, 4));
          System.out.println(String.format("Hits: %d\t Hit rate: %.2f%%", hit6, hit6 / 5000000.0 * 100.0));
          System.out.println("---------------------------");
          System.out.println("Cache #7:");
          System.out.println(String.format("Cache size: %dB\t Associativity: %d\t Block size: %d", fourKB, 1, 1));
          System.out.println(String.format("Hits: %d\t Hit rate: %.2f%%", hit7, (float)(hit7 / 5000000.0)* 100));
+         System.out.println("---------------------------");
      }
 }
