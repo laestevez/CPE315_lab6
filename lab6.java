@@ -4,8 +4,20 @@
  * CPE 315-07
  * Lab 6
 */
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.*;
+import java.io.PrintStream;
+import java.lang.Math.*;
 
-public class lab4 {
+
+public class lab6 {
     static int addrCount;
 
     public static int oneWay(int hitCount, int addr, int[] cache){
@@ -26,46 +38,52 @@ public class lab4 {
         return hitCount;
     }
 
-    public static void main(String[] args) {
-        Parser parser = new Parser();
-        addrCount = 0;
+
+   public static void main(String[] args) {
+      int addrCount = 0;
+      int twoKB = (int)(Math.pow(2, 11));
 
         //Functions could return an int that counts the hit count
-        int hit1, hit2, hit3, hit4, hit5, hit6, hit7;
+        int hit1 = 0, hit2 = 0, hit3 = 0 , hit4 = 0 ,
+            hit5 = 0, hit6 = 0, hit7 = 0;
         int[] problemOne = new int[512];
 
         if (args.length == 0) {
            System.out.println("usage: java lab6 [filename]");
            return;
         }
-
-        String filename = args[0];
-        Scanner scanner = new Scanner(System.in);
-        File inputFile = new File(filename);
-
-        //read file
-        try {
-            File scriptFile = new File(scriptName);
-            Scanner scanner = new Scanner(scriptFile);
+         String filename = args[0];
+         File inputFile = new File(filename);
+         try {
+            Scanner scanner = new Scanner(inputFile);
+            int lineNum = 0;
+            MultiWayCache cache4 = new MultiWayCache(twoKB, 2, 1);
+            // MultiWayCache cache5 = new MultiWayCache(twoKB, 4, 1);
+            // MultiWayCache cache6 = new MultiWayCache(twoKB, 4, 4);
             while (scanner.hasNextLine()) {
-                String line = scanner.nextLine().trim();
-                //to do: need to grab just the addr not the whole line
-
-                //checks \n
-                if (addr.length() == 0)
-                    continue;
-
-                //to do: add funtions in here
-                hit1 = oneWay(hit1, addr, problemOne);
-
-                //adds to line count
-                addrCount++;
+               String line = scanner.nextLine().trim();
+               String addr = line.substring(2);
+               int addrDecimal = Integer.parseInt(addr, 16);
+               hit4 = hit4 + cache4.storeAddr(lineNum, addrDecimal);
+               // hit5 = hit5 + cache5.storeAddr(lineNum, addrDecimal);
+               // hit6 = hit6 + cache6.storeAddr(lineNum, addrDecimal);
+               lineNum++;
             }
-         }
-      }
+         System.out.println("Cache #4:");
+         System.out.println(String.format("Cache size: %d\t Associativity: %d\t Block size: %d", twoKB, 2, 1));
+         System.out.println(String.format("Hits: %d\t Hit rate: %f", hit4, (float)(hit4 / 5000000.0)));
+   
+         // System.out.println("Cache #5:");
+         // System.out.println(String.format("Cache size: %d\t Associativity: %d\t Block size: %d", twoKB, 4, 1));
+         // System.out.println(String.format("Hits: %d\t Hit rate: %f", hit5, (float)(hit5 / 5000000.0)));
+
+         // System.out.println("Cache #6:");
+         // System.out.println(String.format("Cache size: %d\t Associativity: %d\t Block size: %d", twoKB, 4, 4));
+         // System.out.println(String.format("Hits: %d\t Hit rate: %f", hit6, (float)(hit6 / 5000000.0)));
+     }
       catch (FileNotFoundException e) {
-         System.out.println("File not found");
+         System.out.println("Oh no my code");
          e.printStackTrace();
       }
-     }
+   }
 }
