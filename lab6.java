@@ -18,26 +18,6 @@ import java.lang.Math.*;
 
 
 public class lab6 {
-    static int addrCount;
-
-    public static int oneWay(int hitCount, int addr, int[] cache){
-
-        //byte_Offset of two, no block_Offset, index is 9 bits, tag is 21 bits
-        int index = (addr >> 2) & 511; //grabs the index
-        System.out.println(index);
-
-        int tag = addr >> 9;
-
-        if(cache[index] == -1) //cache is empty. Miss adds it to cache
-            cache[index] = tag;
-        else if(cache[index] == tag){ //in the cache, hit adds one to the counter
-            hitCount++;
-        }else{ //cache has something but not equal, Miss replaces the tag in cache
-            cache[index] = tag;
-        }
-        return hitCount;
-    }
-
 
    public static void main(String[] args) {
       int addrCount = 0;
@@ -57,21 +37,30 @@ public class lab6 {
          try {
             Scanner scanner = new Scanner(inputFile);
             int lineNum = 0;
-            MultiWayCache cache4 = new MultiWayCache(twoKB, 2, 1);
+            OneWayCache cache1 = new OneWayCache(twoKB, 1, 1);
+
+            //MultiWayCache cache4 = new MultiWayCache(twoKB, 2, 1);
             // MultiWayCache cache5 = new MultiWayCache(twoKB, 4, 1);
             // MultiWayCache cache6 = new MultiWayCache(twoKB, 4, 4);
             while (scanner.hasNextLine()) {
                String line = scanner.nextLine().trim();
                String addr = line.substring(2);
                int addrDecimal = Integer.parseInt(addr, 16);
-               hit4 = hit4 + cache4.storeAddr(lineNum, addrDecimal);
+
+               hit1 += cache1.storeAddr(addrDecimal);
+               //hit4 = hit4 + cache4.storeAddr(lineNum, addrDecimal);
                // hit5 = hit5 + cache5.storeAddr(lineNum, addrDecimal);
                // hit6 = hit6 + cache6.storeAddr(lineNum, addrDecimal);
                lineNum++;
             }
-         System.out.println("Cache #4:");
-         System.out.println(String.format("Cache size: %d\t Associativity: %d\t Block size: %d", twoKB, 2, 1));
-         System.out.println(String.format("Hits: %d\t Hit rate: %f", hit4, (float)(hit4 / 5000000.0)));
+
+        System.out.println("Cache #1:");
+        System.out.println(String.format("Cache size: %d\t Associativity: %d\t Block size: %d", twoKB, 1, 1));
+        System.out.println(String.format("Hits: %d\t Hit rate: %f", hit1, (float)(hit1 / 5000000.0)));
+
+        //  System.out.println("Cache #4:");
+        //  System.out.println(String.format("Cache size: %d\t Associativity: %d\t Block size: %d", twoKB, 2, 1));
+        //  System.out.println(String.format("Hits: %d\t Hit rate: %f", hit4, (float)(hit4 / 5000000.0)));
    
          // System.out.println("Cache #5:");
          // System.out.println(String.format("Cache size: %d\t Associativity: %d\t Block size: %d", twoKB, 4, 1));

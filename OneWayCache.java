@@ -15,24 +15,22 @@ public class OneWayCache {
       this.wordsPerBlock = wordsPerBlock;
       this.indexBits = (int)(Math.log(cacheSize / (4 * wordsPerBlock * assoc)) / Math.log(2));
       this.tagBits = 32 - indexBits - blockOffsetBits - byteOffsetBits;
-      this.cacheArr = new int[assoc];
+      this.cacheArr = new int[(int)(Math.pow(2, indexBits))];
 
    }
 
-   public int storeAddr(int lineNum, int addr) {
+   public int storeAddr(int addr) {
       int index = (addr >> 2) & (int)(Math.pow(2, indexBits) - 1);
       int tag = addr >> (32 - tagBits);
-      int lru = cacheArr[0][index][0];
-      int lruIndex = 0;
 
-      if(cache[index] == -1){ //cache is empty. Miss adds it to cache
-        cache[index] = tag;
+      if(cacheArr[index] == -1){ //cache is empty. Miss adds it to cache
+        cacheArr[index] = tag;
         return 0;
       }
-      else if(cache[index] == tag){ //in the cache, hit adds one to the counter
+      else if(cacheArr[index] == tag){ //in the cache, hit adds one to the counter
         return 1;
       }else{ //cache has something but not equal, Miss replaces the tag in cache
-        cache[index] = tag;
+        cacheArr[index] = tag;
         return 0;
       }
    }
