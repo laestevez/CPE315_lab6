@@ -4,12 +4,12 @@ import java.lang.Math;
 public class OneWayCache {
 
    int [] cacheArr;
-   int tagBits, indexBits, cacheSize, wordsPerBlock, assoc; 
+   int tagBits, indexBits, cacheSize, wordsPerBlock, assoc, blockOffsetBits; 
 
    public OneWayCache(int cacheSize, int assoc, int wordsPerBlock) {
 
       int byteOffsetBits = 2;
-      int blockOffsetBits = (int)(Math.log(wordsPerBlock) / Math.log(2));
+      this.blockOffsetBits = (int)(Math.log(wordsPerBlock) / Math.log(2));
       this.cacheSize = cacheSize;
       this.assoc = assoc;
       this.wordsPerBlock = wordsPerBlock;
@@ -20,7 +20,7 @@ public class OneWayCache {
    }
 
    public int storeAddr(int addr) {
-      int index = (addr >> 2) & (int)(Math.pow(2, indexBits) - 1);
+      int index = (addr >> 2 + blockOffsetBits) & (int)(Math.pow(2, indexBits) - 1);
       int tag = addr >> (32 - tagBits);
 
       if(cacheArr[index] == -1){ //cache is empty. Miss adds it to cache
