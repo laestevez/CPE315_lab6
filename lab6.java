@@ -85,16 +85,16 @@ public class lab6 {
 
         System.out.println("Cache #1:");
         System.out.println(String.format("Cache size: %dB\t Associativity: %d\t Block size: %d", twoKB, 1, 1));
-        System.out.println(String.format("Hits: %d\t Hit rate: %f", hit1, (float)(hit1 / 5000000.0)));
-
+        System.out.println(String.format("Hits: %d\t Hit rate: %.2f%%", hit1, (float)(hit1 / 5000000.0) * 100));
+        System.out.println("---------------------------");
         System.out.println("Cache #2:");
         System.out.println(String.format("Cache size: %dB\t Associativity: %d\t Block size: %d", twoKB, 1, 2));
-        System.out.println(String.format("Hits: %d\t Hit rate: %f", hit2, (float)(hit2 / 5000000.0)));
-
+        System.out.println(String.format("Hits: %d\t Hit rate: %.2f%%", hit2, (float)(hit2 / 5000000.0)* 100));
+        System.out.println("---------------------------");
         System.out.println("Cache #3:");
         System.out.println(String.format("Cache size: %dB\t Associativity: %d\t Block size: %d", twoKB, 1, 4));
-        System.out.println(String.format("Hits: %d\t Hit rate: %f", hit3, (float)(hit3 / 5000000.0)));
-
+        System.out.println(String.format("Hits: %d\t Hit rate: %.2f%%", hit3, (float)(hit3 / 5000000.0)* 100));
+        System.out.println("---------------------------");
         //  System.out.println("Cache #4:");
         //  System.out.println(String.format("Cache size: %d\t Associativity: %d\t Block size: %d", twoKB, 2, 1));
         //  System.out.println(String.format("Hits: %d\t Hit rate: %f", hit4, (float)(hit4 / 5000000.0)));
@@ -109,7 +109,7 @@ public class lab6 {
          
          System.out.println("Cache #7:");
          System.out.println(String.format("Cache size: %dB\t Associativity: %d\t Block size: %d", fourKB, 1, 1));
-         System.out.println(String.format("Hits: %d\t Hit rate: %f", hit7, (float)(hit7 / 5000000.0)));
+         System.out.println(String.format("Hits: %d\t Hit rate: %.2f%%", hit7, (float)(hit7 / 5000000.0)* 100));
      }
       catch (FileNotFoundException e) {
          System.out.println("Oh no my code");
