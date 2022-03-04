@@ -18,7 +18,6 @@ import java.lang.Math.*;
 
 
 public class lab6 {
-    static int addrCount;
 
     public static int oneWay(int hitCount, int addr, int[] cache){
 
@@ -60,15 +59,40 @@ public class lab6 {
             MultiWayCache cache4 = new MultiWayCache(twoKB, 2, 1);
             MultiWayCache cache5 = new MultiWayCache(twoKB, 4, 1);
             MultiWayCache cache6 = new MultiWayCache(twoKB, 4, 4);
+            OneWayCache cache1 = new OneWayCache(twoKB, 1, 1);
+            OneWayCache cache2 = new OneWayCache(twoKB, 1, 2);
+            OneWayCache cache3 = new OneWayCache(twoKB, 1, 4);
+
             while (scanner.hasNextLine()) {
                String line = scanner.nextLine().trim();
                String addr = line.substring(2);
                int addrDecimal = Integer.parseInt(addr, 16);
+               hit1 += cache1.storeAddr(addrDecimal);
+               hit2 += cache2.storeAddr(addrDecimal);
+               hit3 += cache3.storeAddr(addrDecimal);
                hit4 = hit4 + cache4.storeAddr(lineNum, addrDecimal);
                hit5 = hit5 + cache5.storeAddr(lineNum, addrDecimal);
                hit6 = hit6 + cache6.storeAddr(lineNum, addrDecimal);
                lineNum++;
             }
+         }
+         catch (FileNotFoundException e) {
+            System.out.println("Oh no my code");
+            e.printStackTrace();
+         }
+
+        System.out.println("Cache #1:");
+        System.out.println(String.format("Cache size: %d\t Associativity: %d\t Block size: %d", twoKB, 1, 1));
+        System.out.println(String.format("Hits: %d\t Hit rate: %f", hit1, (float)(hit1 / 5000000.0)));
+
+        System.out.println("Cache #2:");
+        System.out.println(String.format("Cache size: %d\t Associativity: %d\t Block size: %d", twoKB, 1, 2));
+        System.out.println(String.format("Hits: %d\t Hit rate: %f", hit2, (float)(hit2 / 5000000.0)));
+
+        System.out.println("Cache #3:");
+        System.out.println(String.format("Cache size: %d\t Associativity: %d\t Block size: %d", twoKB, 1, 4));
+        System.out.println(String.format("Hits: %d\t Hit rate: %f", hit3, (float)(hit3 / 5000000.0)));
+
          System.out.println("Cache #4:");
          System.out.println(String.format("Cache size: %d\t Associativity: %d\t Block size: %d", twoKB, 2, 1));
          System.out.println(String.format("Hits: %d\t Hit rate: %.2f%%", hit4, hit4 / 5000000.0 * 100));
@@ -83,9 +107,4 @@ public class lab6 {
          System.out.println("---------------------------");
 
      }
-      catch (FileNotFoundException e) {
-         System.out.println("Oh no my code");
-         e.printStackTrace();
-      }
-   }
 }

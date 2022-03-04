@@ -40,5 +40,4 @@ public class MultiWayCache {
       cacheArr[lruIndex][index][1] = tag;
       return 0;
    }
-
 }
