@@ -28,11 +28,9 @@ public class Cache {
             cacheArr[k][index][0] = lineNum; 
             return 1;
          }
-         else {
-            if (Math.min(lru, cacheArr[k][index][0]) == cacheArr[k][index][0]) {
-               lru = cacheArr[k][index][0];
-               lruIndex = k;
-            }
+         if (cacheArr[k][index][0] < lru) {
+            lru = cacheArr[k][index][0];
+            lruIndex = k;
          }
       }
       cacheArr[lruIndex][index][0] = lineNum;
