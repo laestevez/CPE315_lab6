@@ -1,3 +1,9 @@
+/* 
+ * Luis Estevez
+ * Vincent Viloria
+ * CPE 315-07
+ * Lab 6
+*/
 import java.lang.Math;
 
 public class Cache {
