@@ -33,25 +33,25 @@ public class lab6 {
          Scanner scanner = new Scanner(inputFile);
          int lineNum = 0;
 
-         OneWayCache cache1 = new OneWayCache(twoKB, 1, 1);
-         OneWayCache cache2 = new OneWayCache(twoKB, 1, 2);
-         OneWayCache cache3 = new OneWayCache(twoKB, 1, 4);
-         MultiWayCache cache4 = new MultiWayCache(twoKB, 2, 1);
-         MultiWayCache cache5 = new MultiWayCache(twoKB, 4, 1);
-         MultiWayCache cache6 = new MultiWayCache(twoKB, 4, 4);
-         OneWayCache cache7 = new OneWayCache(fourKB, 1, 1);
+         Cache cache1 = new Cache(twoKB, 1, 1);
+         Cache cache2 = new Cache(twoKB, 1, 2);
+         Cache cache3 = new Cache(twoKB, 1, 4);
+         Cache cache4 = new Cache(twoKB, 2, 1);
+         Cache cache5 = new Cache(twoKB, 4, 1);
+         Cache cache6 = new Cache(twoKB, 4, 4);
+         Cache cache7 = new Cache(fourKB, 1, 1);
 
          while (scanner.hasNextLine()) {
             String line = scanner.nextLine().trim();
             String addr = line.substring(2);
             int addrDecimal = Integer.parseInt(addr, 16);
-            hit1 += cache1.storeAddr(addrDecimal);
-            hit2 += cache2.storeAddr(addrDecimal);
-            hit3 += cache3.storeAddr(addrDecimal);
+            hit1 += cache1.storeAddr(lineNum, addrDecimal);
+            hit2 += cache2.storeAddr(lineNum, addrDecimal);
+            hit3 += cache3.storeAddr(lineNum, addrDecimal);
             hit4 = hit4 + cache4.storeAddr(lineNum, addrDecimal);
             hit5 = hit5 + cache5.storeAddr(lineNum, addrDecimal);
             hit6 = hit6 + cache6.storeAddr(lineNum, addrDecimal);
-            hit7 += cache7.storeAddr(addrDecimal);
+            hit7 += cache7.storeAddr(lineNum, addrDecimal);
             lineNum++;
          }
       }

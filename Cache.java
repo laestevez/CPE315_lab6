@@ -1,11 +1,11 @@
 import java.lang.Math;
 
-public class MultiWayCache {
+public class Cache {
 
    int [][][] cacheArr;
    int tagBits, indexBits, blockOffsetBits, cacheSize, wordsPerBlock, assoc; 
 
-   public MultiWayCache(int cacheSize, int assoc, int wordsPerBlock) {
+   public Cache(int cacheSize, int assoc, int wordsPerBlock) {
      
       int byteOffsetBits = 2;
       this.blockOffsetBits = (int)(Math.log(wordsPerBlock) / Math.log(2));
@@ -28,11 +28,9 @@ public class MultiWayCache {
             cacheArr[k][index][0] = lineNum; 
             return 1;
          }
-         else {
-            if (Math.min(lru, cacheArr[k][index][0]) == cacheArr[k][index][0]) {
-               lru = cacheArr[k][index][0];
-               lruIndex = k;
-            }
+         if (cacheArr[k][index][0] < lru) {
+            lru = cacheArr[k][index][0];
+            lruIndex = k;
          }
       }
       cacheArr[lruIndex][index][0] = lineNum;
